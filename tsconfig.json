@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2018",
+    "lib": ["dom", "dom.iterable", "esnext", "esnext.asynciterable"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,7 +16,10 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
