@@ -1,12 +1,13 @@
 {
-  "name": "next-grapqhl-dogs",
+  "name": "next-graphql-dogs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "@types/node": "18.15.11",
@@ -23,5 +24,12 @@
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^3.2.2",
+    "@graphql-codegen/typescript": "^3.0.2",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.9",
+    "@graphql-codegen/typescript-operations": "^3.0.2",
+    "@graphql-codegen/typescript-react-query": "^4.1.0"
   }
 }
