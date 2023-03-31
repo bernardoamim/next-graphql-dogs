@@ -38,13 +38,26 @@ export type DogAttribute = {
 
 export type Query = {
   __typename?: 'Query';
+  dog?: Maybe<Dog>;
   dogs: Array<Dog>;
+};
+
+
+export type QueryDogArgs = {
+  name: Scalars['String'];
 };
 
 export type GetDogsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetDogsQuery = { __typename?: 'Query', dogs: Array<{ __typename?: 'Dog', name: string, breed: string, ageInWeeks: number, image: string, sex: string, weight: number, fee: number }> };
+
+export type GetDogByNameQueryVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type GetDogByNameQuery = { __typename?: 'Query', dog?: { __typename?: 'Dog', name: string, breed: string, ageInWeeks: number, image: string, sex: string, description: Array<string>, color: string, attributes: Array<{ __typename?: 'DogAttribute', key: string, value: string }> } | null };
 
 
 export const GetDogsDocument = gql`
@@ -60,6 +73,23 @@ export const GetDogsDocument = gql`
   }
 }
     `;
+export const GetDogByNameDocument = gql`
+    query getDogByName($name: String!) {
+  dog(name: $name) {
+    name
+    breed
+    ageInWeeks
+    image
+    sex
+    description
+    color
+    attributes {
+      key
+      value
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -70,6 +100,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     getDogs(variables?: GetDogsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDogsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetDogsQuery>(GetDogsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDogs', 'query');
+    },
+    getDogByName(variables: GetDogByNameQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetDogByNameQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetDogByNameQuery>(GetDogByNameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getDogByName', 'query');
     }
   };
 }

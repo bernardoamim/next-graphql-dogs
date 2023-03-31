@@ -8,5 +8,16 @@ export class DogsResolver {
   dogs(): Dog[] {
     return dogs
   }
+
+  @Query(() => Dog, { nullable: true })
+  dog( @Arg( "name", () => String ) name: string ): Dog | undefined {
+    const dog = dogs.find(dog => dog.name === name)
+    
+    if ( dog === undefined ) {
+      throw new Error('Dog not found')
+    }
+
+    return dog;
+  }
 }
 
