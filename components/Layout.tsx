@@ -15,7 +15,12 @@ import {
 } from '@mantine/core';
 import { DogBowl, Home } from 'tabler-icons-react';
 
-export default function Layout({ children } ) {
+interface LayoutProps {
+  children?: React.ReactNode;
+}
+
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
 
@@ -85,3 +90,5 @@ export default function Layout({ children } ) {
     </div>
   );
 }
+
+export default Layout;
